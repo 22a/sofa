@@ -1,5 +1,7 @@
 # Sofa
 
+![alt text](http://www.dfs.co.uk/wcsstore/DFSStorefrontAssetStore/images/dfs_logo.svg "DFS")
+
 To start your Phoenix app:
 
   * Install dependencies with `mix deps.get`
