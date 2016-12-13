@@ -9,3 +9,7 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+Sofa.Repo.delete_all Sofa.User
+
+Sofa.User.changeset(%Sofa.User{}, %{name: "Test User", email: "testuser@example.com", password: "secret", password_confirmation: "secret"})
+|> Sofa.Repo.insert!
