@@ -38,18 +38,11 @@ defmodule Sofa.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    # add public resources below
   end
 
   scope "/", Sofa do
     pipe_through :protected
 
-    # add protected resources below
-    resources "/privates", Sofa.PrivateController
+    # resources "/files", Sofa.FileController
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", Sofa do
-  #   pipe_through :api
-  # end
 end
