@@ -43,6 +43,6 @@ defmodule Sofa.Router do
   scope "/", Sofa do
     pipe_through :protected
 
-    # resources "/files", Sofa.FileController
+    resources "/files", FileController
   end
 end

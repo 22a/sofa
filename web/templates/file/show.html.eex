@@ -1,0 +1,18 @@
+<h2>Show file</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @file.name %>
+  </li>
+
+  <li>
+    <strong>User:</strong>
+    <%= @file.user_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: file_path(@conn, :edit, @file) %>
+<%= link "Back", to: file_path(@conn, :index) %>
