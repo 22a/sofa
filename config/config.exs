@@ -40,3 +40,38 @@ config :coherence, Sofa.Coherence.Mailer,
   adapter: Swoosh.Adapters.Sendgrid,
   api_key: "your api key here"
 # %% End Coherence Configuration %%
+
+config :pooler, pools:
+  [
+    [
+      name: :riak01,
+      group: :riak,
+      max_count: 10,
+      init_count: 5,
+      start_mfa: { Riak.Connection, :start_link, ['0.0.0.0', 32769] }
+    ], [
+      name: :riak02,
+      group: :riak,
+      max_count: 10,
+      init_count: 5,
+      start_mfa: { Riak.Connection, :start_link, ['0.0.0.0', 32771] }
+    ], [
+      name: :riak03,
+      group: :riak,
+      max_count: 10,
+      init_count: 5,
+      start_mfa: { Riak.Connection, :start_link, ['0.0.0.0', 32773] }
+    ], [
+      name: :riak04,
+      group: :riak,
+      max_count: 10,
+      init_count: 5,
+      start_mfa: { Riak.Connection, :start_link, ['0.0.0.0', 32775] }
+    ], [
+      name: :riak05,
+      group: :riak,
+      max_count: 10,
+      init_count: 5,
+      start_mfa: { Riak.Connection, :start_link, ['0.0.0.0', 32777] }
+    ]
+  ]

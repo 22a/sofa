@@ -8,9 +8,16 @@
   </li>
 
   <li>
+    <strong>Contents:</strong>
+    <%= @file.contents %>
+  </li>
+
+  <li>
     <strong>User:</strong>
     <%= @file.user_id %>
   </li>
+
+
 
 </ul>
 
