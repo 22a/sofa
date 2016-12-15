@@ -45,9 +45,10 @@ defmodule Sofa.FileController do
     case file.user_id do
       ^current_user_id ->
         contents = Riak.find("files", file.name).data
-        IO.inspect contents
-        new_file = Map.put(file, :contents, contents)
-        render(conn, "show.html", file: new_file)
+        conn
+        |> put_resp_content_type("application/octet-stream", nil)
+        |> put_resp_header("content-disposition", ~s[attachment; filename="#{file.name}"])
+        |> send_resp(200, contents)
       _ ->
         conn
         |> redirect(to: file_path(conn, :index))
