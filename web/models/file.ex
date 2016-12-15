@@ -1,4 +1,4 @@
-defmodule Sofa.File do
+defmodule Sofa.SFile do
   use Sofa.Web, :model
 
   schema "files" do

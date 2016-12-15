@@ -1,23 +1,29 @@
 defmodule Sofa.FileController do
   use Sofa.Web, :controller
 
-  alias Sofa.File
+  alias Sofa.SFile
 
   def index(conn, _params) do
     current_user_id = Coherence.current_user(conn).id
-    user_files = Repo.all(from f in File, where: f.user_id == ^current_user_id)
+    user_files = Repo.all(from f in SFile, where: f.user_id == ^current_user_id)
     render(conn, "index.html", files: user_files)
   end
 
   def new(conn, _params) do
-    changeset = File.changeset(%File{})
+    changeset = SFile.changeset(%SFile{})
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"file" => file_params}) do
-    # TODO: extract file data here
-    updated_file_params = Map.put(file_params, "user_id", Coherence.current_user(conn).id)
-    changeset = File.changeset(%File{}, updated_file_params)
+  def create(conn, %{"s_file" => file_params}) do
+    current_user_id = Coherence.current_user(conn).id
+    %{"file" => f} = file_params
+    file = %{"user_id" => current_user_id, "name" => f.filename}
+
+    File.open!(f.path, [:read], fn(file) ->
+      raw_file = IO.binread(file, :all)
+    end)
+
+    changeset = SFile.changeset(%SFile{}, file)
 
     case Repo.insert(changeset) do
       {:ok, _file} ->
@@ -30,17 +36,11 @@ defmodule Sofa.FileController do
   end
 
   def show(conn, %{"id" => id}) do
-    file = Repo.get!(File, id)
+    file = Repo.get!(SFile, id)
     current_user_id = Coherence.current_user(conn).id
-    IO.inspect file.user_id
-    IO.inspect current_user_id
+
     case file.user_id do
-      # i have no idea why this nil case is needed
-      nil ->
-        conn
-        |> redirect(to: file_path(conn, :index))
-      current_user_id ->
-        IO.inspect "user match"
+      ^current_user_id ->
         render(conn, "show.html", file: file)
       _ ->
         conn
@@ -49,14 +49,14 @@ defmodule Sofa.FileController do
   end
 
   def edit(conn, %{"id" => id}) do
-    file = Repo.get!(File, id)
-    changeset = File.changeset(file)
+    file = Repo.get!(SFile, id)
+    changeset = SFile.changeset(file)
     render(conn, "edit.html", file: file, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "file" => file_params}) do
-    file = Repo.get!(File, id)
-    changeset = File.changeset(file, file_params)
+  def update(conn, %{"id" => id, "s_file" => file_params}) do
+    file = Repo.get!(SFile, id)
+    changeset = SFile.changeset(file, file_params)
 
     case Repo.update(changeset) do
       {:ok, file} ->
@@ -69,7 +69,7 @@ defmodule Sofa.FileController do
   end
 
   def delete(conn, %{"id" => id}) do
-    file = Repo.get!(File, id)
+    file = Repo.get!(SFile, id)
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
