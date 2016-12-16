@@ -1,1 +1,25 @@
 /* This file is for your main application css. */
+.delete-href, .delete-href:visited{
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.42857143;
+  color: #d9534f;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.delete-href:hover{
+  background: #ffe8e8;
+  text-decoration: none;
+  color: #d9534f;
+}
+
+.dfs-logo{
+  height: 50px;
+  width: 50px;
+  margin-left: -5px;
+  margin-top: -15px;
+  -webkit-filter: drop-shadow(1px 1px 0 white);
+  filter: drop-shadow(1px 1px 0 white);
+}

@@ -1,11 +1,17 @@
-<h2>Listing files</h2>
+<div class="row">
+  <div class="col-md-8">
+    <h2>Listing files</h2>
+  </div>
+  <div class="col-md-4" style="padding-top: 14px;">
+    <%= link "Upload File", to: file_path(@conn, :new), class: "btn btn-success btn-lg" %>
+  </div>
+</div>
 
 <table class="table">
   <thead>
     <tr>
       <th>Name</th>
-      <th>User</th>
-
+      <%# <th>Size</th> %>
       <th></th>
     </tr>
   </thead>
@@ -13,10 +19,10 @@
 <%= for file <- @files do %>
     <tr>
       <td><%= file.name %></td>
-      <td><%= file.user_id %></td>
+      <%# <td><%= file.size %1></td> %>
 
       <td class="text-right">
-        <%= link "Show", to: file_path(@conn, :show, file), class: "btn btn-default btn-xs" %>
+        <%= link "Download", to: file_path(@conn, :show, file), class: "btn btn-info btn-xs" %>
         <%= link "Edit", to: file_path(@conn, :edit, file), class: "btn btn-default btn-xs" %>
         <%= link "Delete", to: file_path(@conn, :delete, file), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
@@ -25,4 +31,3 @@
   </tbody>
 </table>
 
-<%= link "New file", to: file_path(@conn, :new) %>

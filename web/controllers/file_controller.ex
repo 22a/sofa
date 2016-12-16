@@ -66,10 +66,10 @@ defmodule Sofa.FileController do
     changeset = SFile.changeset(file, file_params)
 
     case Repo.update(changeset) do
-      {:ok, file} ->
+      {:ok, _file} ->
         conn
         |> put_flash(:info, "File updated successfully.")
-        |> redirect(to: file_path(conn, :show, file))
+        |> redirect(to: file_path(conn, :index))
       {:error, changeset} ->
         render(conn, "edit.html", file: file, changeset: changeset)
     end
