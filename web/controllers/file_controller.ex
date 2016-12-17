@@ -17,7 +17,11 @@ defmodule Sofa.FileController do
   def create(conn, %{"s_file" => file_params}) do
     current_user_id = Coherence.current_user(conn).id
     %{"file" => f} = file_params
-    file = %{"user_id" => current_user_id, "name" => f.filename}
+    %{size: size} = File.stat! f.path
+    file = %{"user_id" => current_user_id,
+      "name" => f.filename,
+      "size" => size
+    }
 
     File.open!(f.path, [:read], fn(file) ->
       raw_file = IO.binread(file, :all)
