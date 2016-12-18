@@ -20,7 +20,8 @@ defmodule Sofa.FileController do
     %{size: size} = File.stat! f.path
     file = %{"user_id" => current_user_id,
       "name" => f.filename,
-      "size" => size
+      "size" => size,
+      "last_updated" => DateTime.utc_now()
     }
 
     File.open!(f.path, [:read], fn(file) ->

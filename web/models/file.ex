@@ -4,6 +4,7 @@ defmodule Sofa.SFile do
   schema "files" do
     field :name, :string
     field :size, :integer
+    field :last_updated, Ecto.DateTime
     belongs_to :user, Sofa.User
 
     timestamps()
@@ -14,7 +15,7 @@ defmodule Sofa.SFile do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :size, :user_id])
-    |> validate_required([:name, :size, :user_id])
+    |> cast(params, [:name, :size, :last_updated, :user_id])
+    |> validate_required([:name, :size, :last_updated, :user_id])
   end
 end

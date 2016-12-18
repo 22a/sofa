@@ -12,6 +12,7 @@
     <tr>
       <th>Name</th>
       <th>Size</th>
+      <th>Last Updated</th>
       <th></th>
     </tr>
   </thead>
@@ -20,6 +21,7 @@
     <tr>
       <td><%= file.name %></td>
       <td><%= file.size %></td>
+      <td><%= file.last_updated %></td>
 
       <td class="text-right">
         <%= link "Download", to: file_path(@conn, :show, file), class: "btn btn-info btn-xs" %>
