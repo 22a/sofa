@@ -26,7 +26,7 @@ defmodule Sofa.FileController do
 
     File.open!(f.path, [:read], fn(file) ->
       raw_file = IO.binread(file, :all)
-      o = Riak.Object.create(bucket: "files", key: f.filename, data: raw_file)
+      o = Riak.Object.create(bucket: "#{current_user_id}:files", key: f.filename, data: raw_file)
       Riak.put(o)
     end)
 
@@ -43,13 +43,12 @@ defmodule Sofa.FileController do
   end
 
   def show(conn, %{"id" => id}) do
-    file = Repo.get!(SFile, id)
-    IO.inspect file
     current_user_id = Coherence.current_user(conn).id
+    file = Repo.get!(SFile, id)
 
     case file.user_id do
       ^current_user_id ->
-        contents = Riak.find("files", file.name).data
+        contents = Riak.find("#{current_user_id}:files", file.name).data
         conn
         |> put_resp_content_type("application/octet-stream", nil)
         |> put_resp_header("content-disposition", ~s[attachment; filename="#{file.name}"])
