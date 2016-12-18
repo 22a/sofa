@@ -1,4 +1,4 @@
-![alt text](http://www.dfs.co.uk/wcsstore/DFSStorefrontAssetStore/images/dfs_logo.svg "DFS")
+![DFS Logo](priv/static/images/dfs_logo.svg)
 
 # Sofa: Distributed File System
 
@@ -42,6 +42,37 @@ Considering the problemspace I have decided eventual consistency is suitable for
 This project was developed on [digital ocean](https://www.digitalocean.com/) droplets with the separate components on physically distinct machines.
 
 However if this system were deployed for real I would suspect it would be best deployed on some bigger cloud hosting platform such as [Amazon Web Services](https://aws.amazon.com/) where the different components can communicate freely over the closed internal network.
+
+
+The Sofa homepage with options to modify account, invite friends(to register and upload files), and links to navigate to various parts of the system.
+![Homepage](screenshots/0-homepage.png)
+
+Registration page, industry standard hashing + salting
+![Registration Page](screenshots/1-register.png)
+
+Login page
+![Login Page](screenshots/2-login.png)
+
+Dropdown dialogue
+![Dropdown](screenshots/3-dropdown.png)
+
+Upload steps
+![upload1](screenshots/4-upload-step1.png)
+![upload2](screenshots/5-upload-step2.png)
+![upload3](screenshots/6-upload-step3.png)
+
+Successful file upload
+![DFS Logo](screenshots/7-upload-success.png)
+
+Download Steps
+![DFS Logo](screenshots/8-download-step1.png)
+![DFS Logo](screenshots/9-download-step2.png)
+
+Edit account dialog, password change etc
+![DFS Logo](screenshots/10-editaccount.png)
+
+A sample token used in authentication + authorisation process
+![DFS Logo](screenshots/11-tokenauth.png)
 
 ## Setup
 
