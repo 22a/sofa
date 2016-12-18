@@ -20,6 +20,6 @@
   width: 50px;
   margin-left: -5px;
   margin-top: -15px;
-  -webkit-filter: drop-shadow(1px 1px 0 white);
-  filter: drop-shadow(1px 1px 0 white);
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
 }
