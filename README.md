@@ -1,4 +1,4 @@
-![DFS Logo](priv/static/images/dfs_logo.svg)
+![DFS Logo](web/static/assets/images/dfs_logo.svg)
 
 # Sofa: Distributed File System
 
